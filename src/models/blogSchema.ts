@@ -13,7 +13,7 @@ const BlogSchema =  new mongoose.Schema({
         required: true
     },
 
-    description :{
+    content :{
         type: String,
         required: true
     },
@@ -27,12 +27,18 @@ const BlogSchema =  new mongoose.Schema({
         enum: ['AI', 'Web3', 'DevOPS','CyberSecurity','Finance','MachineLearning','DataScience',],
         required: true
     },
+
+    likes : {
+        type: Number,
+        default: 0
+
+    },
+
     publisher : {
         type: Schema.Types.ObjectId,
         ref : 'User',
         required: true
-
-    }
+    },
 
 
 })
