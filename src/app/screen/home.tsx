@@ -1,13 +1,14 @@
 
 import React from 'react'
-import { BackgroundLinesDemo } from '../_components/Hero'
+
 import CategoryMenubar from '../_components/Filter'
 import { CardHoverEffectDemo } from '../_components/BlogCard'
+import { BackgroundBeamsWithCollisionDemo } from '../_components/Hero'
 
 const Land = () => {
   return (
     <>
-    <BackgroundLinesDemo/>
+   <BackgroundBeamsWithCollisionDemo/>
     <CategoryMenubar/>
     <CardHoverEffectDemo/>
     </>

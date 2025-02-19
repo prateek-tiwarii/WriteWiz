@@ -1,20 +1,24 @@
 import React from "react";
-import { BackgroundLines } from "@/components/ui/background-lines";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
-export function BackgroundLinesDemo() {
+export function BackgroundBeamsWithCollisionDemo() {
   return (
-    <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 bg-black">
-      <h2 className="bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
-      Blog Better, Faster, and <br /> Smarter with AI by Your Side.
-      </h2>
-      <p className="max-w-xl mx-auto text-sm md:text-lg text-neutral-700 dark:text-neutral-400 text-center">
-      Effortless Blogging, Inspired Writing
-      </p>
+    <BackgroundBeamsWithCollision className="bg-black">
+      <h2 className="text-2xl  relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-white dark:text-white font-sans tracking-tight">
+      Blog Better, Faster, and
+      Smarter with{" "}
+        <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
+          <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
+            <span className="">AI by Your Side.</span>
+          </div>
+          <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
+            <span className="">AI by Your Side.</span>
+          </div>
 
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-8">
-        <button className="btn btn-primary border border-white  p-3 rounded-3xl">Get Started</button>
-        <button className="btn btn-secondary border border-white p-3 rounded-3xl">Learn More</button>
         </div>
-    </BackgroundLines>
+      </h2>
+    </BackgroundBeamsWithCollision>
   );
 }
+
+
