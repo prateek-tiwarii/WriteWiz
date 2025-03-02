@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -8,12 +8,55 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { set } from "mongoose";
+import { useRouter } from "next/navigation";
 
 export default function signUp() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
+
+    try{
+    const response = await axios.post('http://localhost:3000/api/signup' , FormData);
+    console.log(response);
+    toast.success('User created successfully');
+     
+   router.push('/LogIn');   
+  
+    }
+    catch(err){
+      console.log(err);
+      toast.error('Sign up failed , try again!');
+    }
+  
+   
   };
+
+
+  const [error , setError] = useState('');
+  const [FormData , setFormData] = useState({
+    name : "",
+    email : '',
+    password : ''
+  });
+
+  
+
+  const handleChange = (e) =>{
+    const {name , value} = e.target;
+
+     setFormData((prevData)=>({
+      ...prevData ,
+      [name] : value
+     }))
+
+     
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-black dark:bg-gray-900">
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -29,17 +72,17 @@ export default function signUp() {
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">Name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
+            <Input id="firstname" placeholder="Tyler" type="text" name="name" value={FormData.name} onChange={handleChange} />
           </LabelInputContainer>
           
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" name="email" value={FormData.email} onChange={handleChange} />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" placeholder="••••••••" type="password" name="password" value={FormData.password} onChange={handleChange} />
         </LabelInputContainer>
         
 
@@ -75,7 +118,7 @@ export default function signUp() {
             <BottomGradient />
           </button>
           <p className="text-black">
-  Already have an account? <a href="/signIn" className="text-blue-500 hover:underline">Login</a>
+  Already have an account? <a href="/LogIn" className="text-blue-500 hover:underline">Login</a>
 </p>
          
         </div>
