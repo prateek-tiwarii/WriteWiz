@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-import { SessionProvider } from "next-auth/react";
+import { Providers } from "./_components/common/provider";
 import NavbarWrapper from "./_components/common/NavbarWrapper";
+import { ToastContainer } from "react-toastify";
+import Footer from "./_components/common/footer";
 
 
 
@@ -35,10 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+   <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+   <Providers>
        <NavbarWrapper/>
-        <SessionProvider >
+        
           {children}
-        </SessionProvider>
+         <Footer/>
+          </Providers>
         
       </body>
     </html>

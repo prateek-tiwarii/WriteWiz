@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
 
 const CategoryMenubar = () => {
   const categories = [
@@ -13,6 +15,7 @@ const CategoryMenubar = () => {
   ];
 
   const [activeCategory, setActiveCategory] = useState('all');
+  const { data:session , status }  = useSession();
 
   return (
     <>
@@ -20,6 +23,7 @@ const CategoryMenubar = () => {
         <h1 className='text-4xl font-semibold flex mx-7 '>Recent Blogs</h1>
         
     </div>
+    <div className='flex flex-row justify-between mx-7 '> 
     <div className="w-full max-w-4xl justify-around mx-7 py-4"> 
         <h3 className='text-2xl font-normal'>Sort by category</h3>    
       <nav className="flex overflow-x-auto py-2 no-scrollbar">
@@ -40,6 +44,11 @@ const CategoryMenubar = () => {
           ))}
         </ul>
       </nav>
+      
+    </div>
+
+    { session && <button className=' text-wgutw text-lg font-bold '>Create Blog</button>}
+
     </div>
     </>
   );

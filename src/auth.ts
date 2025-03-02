@@ -59,7 +59,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           email: token.email,
         };
       }
-      console.log("Session created:", session);
+      console.log("Session created:", session); // Check this log in your backend
       return session;
     },
   },
