@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
 import Blog from "@/models/blogSchema";
+import User from "@/models/userSchema";
 import { connectToDB } from "@/utils/connectToDB";
 
-import { Session } from "next-auth";
-import { getSession } from "next-auth/react";
+
 import { NextResponse } from "next/server";
 
 export async function POST(req ,res){
@@ -11,7 +11,7 @@ export async function POST(req ,res){
    await connectToDB();
    try{
 
-    const session = await getSession(auth);
+    const session = await auth()
 
     if(!session){
       
@@ -20,21 +20,24 @@ export async function POST(req ,res){
     }
     else{
 
-    const {title ,content , imgUrl ,category  } = req.json();
+    const {title ,content , imgUrl ,category  } = await req.json();
 
     if(!title || !content || !imgUrl || !category){
         return NextResponse.json({error: "Please enter all fields"},{status: 400});
 
     }
 
-    const author = session.user?.name;
-
+    const user = await User.findOne({ email: session.user.email });
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+    const authorId = user._id;
     const createdBlog = await Blog.create({
         title,
         content,
         img : imgUrl,
         category,
-        publisher :  author
+        publisher :  authorId
     })
 
     createdBlog.save();

@@ -7,7 +7,7 @@ export async function POST(req , res){
 
     try{
 
-    const {description} = req.json();
+    const {description} = await req.json();
 
     if(!description){
         return NextResponse.json("Description is required");
@@ -20,7 +20,7 @@ export async function POST(req , res){
 
     if(result&& result.response){
         const generatedText =  await result.response.text();
-        return NextResponse.json({generatedText});
+        return NextResponse.json( { text : generatedText});
 
     }else {
       throw new Error('No response received from model.');
