@@ -1,7 +1,10 @@
+"use client"
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-
+import { useSession } from "next-auth/react";
 export function BackgroundBeamsWithCollisionDemo() {
+  const { data: session, status } = useSession();
+
   return (
     <BackgroundBeamsWithCollision className="bg-black">
       <h2 className="text-2xl  relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-white dark:text-white font-sans tracking-tight">
@@ -14,8 +17,17 @@ export function BackgroundBeamsWithCollisionDemo() {
           <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
             <span className="">AI by Your Side.</span>
           </div>
+        
+          
 
         </div>
+
+        <div className="flex flex-row gap-7 text-center mt-5 font-medium  text-xl items-center justify-center ">
+            <button className="border border-white rounded-2xl bg-gray-950 p-2">Get Started</button>
+
+            {session ?(<button className="border border-white rounded-2xl bg-gray-950 p-2">Dashoard</button>):(<button className="border border-white rounded-2xl bg-gray-950 p-2">How it works</button>)}
+
+          </div>
       </h2>
     </BackgroundBeamsWithCollision>
   );

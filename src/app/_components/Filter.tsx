@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 const CategoryMenubar = () => {
@@ -16,11 +17,13 @@ const CategoryMenubar = () => {
 
   const [activeCategory, setActiveCategory] = useState('all');
   const { data:session , status }  = useSession();
-
+   const router = useRouter();
   return (
     <>
-    <div className='flex '>
+    <div className='flex justify-between mx-7 '>
         <h1 className='text-4xl font-semibold flex mx-7 '>Recent Blogs</h1>
+
+        { session && <button className=' border text-xl border-white rounded-2xl bg-gray-950 p-2 ' onClick= {()=>{router.push('/create-blog')}} >Create Blog +</button>}
         
     </div>
     <div className='flex flex-row justify-between mx-7 '> 
@@ -47,9 +50,10 @@ const CategoryMenubar = () => {
       
     </div>
 
-    { session && <button className=' text-wgutw text-lg font-bold '>Create Blog</button>}
+  
 
     </div>
+    
     </>
   );
 };
