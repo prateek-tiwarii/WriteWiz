@@ -1,46 +1,43 @@
-
+"use client";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
+import axios from "axios";
 import { img } from "framer-motion/client";
+import React, { useEffect } from "react";
 
 export function CardHoverEffectDemo() {
+
+    
+  const [blogs, setBlogs] = React.useState<any[]>([]); 
+
+  const getBlogs = async () => {
+      try {
+          const response = await axios.get('/api/getAllBlogs');
+          setBlogs(response.data);
+      } catch (error) {
+          console.error('Error fetching blogs:', error);
+          setBlogs([]);
+      }
+  }
+
+  
+  useEffect(() => {
+          getBlogs();
+      
+  }, []);
   return (
     <div className="max-w-8xl mx-auto px-8">
-      <HoverEffect items={projects} />
+      <HoverEffect 
+                              items={blogs.map(blog => ({
+                                  img: blog.img || "/bg.jpg", 
+                                  title: blog.title,
+                                  description: blog.content.length > 100 
+                                      ? blog.content.substring(0, 100) + '...' 
+                                      : blog.content,
+                                  publishedAt: new Date(blog.publishedAt).toLocaleDateString(),
+                                  link: `/blog/${blog._id}` 
+                              }))} 
+                          />
     </div>
   );
 }
-export const projects = [
-  {
-    img : "https://picsum.photos/id/237/200/300",
-    title: "Stripe",
-    publishedAt: "2021-03-16",
-    description:
-      "A technology company that builds economic infrastructure for the internet.",
-    link: "https://stripe.com",
-  },
-  {
-    img : "https://picsum.photos/id/237/200/300",
-    title: "Netflix",
-    publishedAt: "2021-03-16",
-    description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
-    link: "https://netflix.com",
-  },
-  {
-    img : "https://picsum.photos/id/237/200/300",
-    title: "Google",
-    publishedAt: "2021-03-16",
-    description:
-      "A multinational technology company that specializes in Internet-related services and products.",
-    link: "https://google.com",
-  },
-  {
-    img : "https://picsum.photos/id/237/200/300",
-    title: "Meta",
-    publishedAt: "2021-03-16",
-    description:
-      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
-    link: "https://meta.com",
-  },
- 
-];
+

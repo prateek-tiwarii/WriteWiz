@@ -140,7 +140,8 @@ export default function CreateBlog() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black/50 backdrop-blur-lg dark:bg-gray-900 mt-11 relative">
+    <div className="flex items-center justify-center min-h-screen bg-[url(/bg2.jpg)] bg-cover bg-center backdrop-blur-lg dark:bg-gray-900 mt-11 relative">
+
      
       <div
         className={`max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black relative transition-all duration-300 ${

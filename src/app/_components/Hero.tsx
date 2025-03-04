@@ -2,8 +2,11 @@
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export function BackgroundBeamsWithCollisionDemo() {
   const { data: session, status } = useSession();
+
+  const router = useRouter();
 
   return (
     <BackgroundBeamsWithCollision className="bg-black">
@@ -25,7 +28,7 @@ export function BackgroundBeamsWithCollisionDemo() {
         <div className="flex flex-row gap-7 text-center mt-5 font-medium  text-xl items-center justify-center ">
             <button className="border border-white rounded-2xl bg-gray-950 p-2">Get Started</button>
 
-            {session ?(<button className="border border-white rounded-2xl bg-gray-950 p-2">Dashoard</button>):(<button className="border border-white rounded-2xl bg-gray-950 p-2">How it works</button>)}
+            {session ?(<button className="border border-white rounded-2xl bg-gray-950 p-2" onClick={() => router.push("/dashboard")}>Dashoard</button>):(<button className="border border-white rounded-2xl bg-gray-950 p-2">How it works</button>)}
 
           </div>
       </h2>
