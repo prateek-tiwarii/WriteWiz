@@ -1,8 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Icon } from "@tabler/icons-react";
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
+import { Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const HoverEffect = ({
@@ -15,10 +19,13 @@ export const HoverEffect = ({
     description: string;
     publishedAt?: string;
     link: string;
+  
   }[];
   className?: string;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+
 
   return (
     <div
@@ -57,6 +64,8 @@ export const HoverEffect = ({
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.publishedAt}</CardDescription>
             <CardDescription>{item.description}</CardDescription>
+          
+
           </Card>
         </Link>
       ))}

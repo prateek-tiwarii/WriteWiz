@@ -35,7 +35,7 @@ export default function BlogDetailPage() {
     if (!blog) return <div className="text-center mt-10">Blog not found</div>;
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto px-4 py-8 mt-24">
             <div className="mb-8">
                 <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
                 <div className="flex items-center space-x-4 text-gray-500">

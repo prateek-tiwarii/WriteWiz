@@ -5,6 +5,7 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { Trash2 } from 'lucide-react';
 const page = () => {
 
     
@@ -63,6 +64,7 @@ const page = () => {
                                 ? blog.content.substring(0, 100) + '...' 
                                 : blog.content,
                             publishedAt: new Date(blog.publishedAt).toLocaleDateString(),
+                          
                             link: `/blog/${blog._id}` 
                         }))} 
                     />
